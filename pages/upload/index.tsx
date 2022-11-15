@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
 import { ChangeEvent, useState } from 'react';
-import { CREATE_RECIPE } from '../../src/graphql/Mutations';
-import { RecipeAttributes } from '../../src/types/recipe';
+import { CREATE_RECIPE } from '~/graphql/Mutations';
+import { RecipeAttributes } from '~/types/recipe';
 
 const UploadPage = () => {
   const [input, setInput] = useState<RecipeAttributes>({
@@ -21,7 +21,9 @@ const UploadPage = () => {
     });
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const name = e.target.name;
     const value = e.target.value;
     setInput((prev) => ({ ...prev, [name]: value }));
@@ -30,18 +32,23 @@ const UploadPage = () => {
   return (
     <div>
       <div>
+        <label>title</label>
         <input name='title' onChange={handleInputChange}></input>
       </div>
       <div>
+        <label>videoURL</label>
         <input name='videoURL' onChange={handleInputChange}></input>
       </div>
       <div>
-        <input name='order' onChange={handleInputChange}></input>
+        <label>order</label>
+        <textarea name='order' onChange={handleInputChange}></textarea>
       </div>
       <div>
+        <label>Ingredients</label>
         <input name='Ingredients' onChange={handleInputChange}></input>
       </div>
       <div>
+        <label>uploader</label>
         <input name='uploader' onChange={handleInputChange}></input>
       </div>
       <button
