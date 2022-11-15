@@ -1,8 +1,15 @@
+import { useQuery } from '@apollo/client';
 import Head from 'next/head';
 import Image from 'next/image';
+import { GET_ALL_RECIPES } from '../src/graphql/Queries';
+import { RecipeAllData } from '../src/types/recipe';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
+  const { loading, error, data } = useQuery<RecipeAllData>(GET_ALL_RECIPES);
+
+  if (loading) return <div>loading...</div>;
+
   return (
     <div className={styles.container}>
       <Head>
@@ -52,6 +59,9 @@ export default function Home() {
             </p>
           </a>
         </div>
+        {data?.recipes.data.map((recipe) => (
+          <div key={recipe.id}>{recipe.attributes.title}</div>
+        ))}
       </main>
 
       <footer className={styles.footer}>
