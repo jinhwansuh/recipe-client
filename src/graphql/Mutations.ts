@@ -5,7 +5,7 @@ export const CREATE_RECIPE = gql`
     $title: String!
     $videoURL: String!
     $order: String!
-    $Ingredients: String!
+    $ingredients: String!
     $uploader: String!
   ) {
     createRecipe(
@@ -13,7 +13,7 @@ export const CREATE_RECIPE = gql`
         title: $title
         videoURL: $videoURL
         order: $order
-        Ingredients: $Ingredients
+        ingredients: $ingredients
         uploader: $uploader
       }
     ) {
@@ -23,7 +23,7 @@ export const CREATE_RECIPE = gql`
           title
           videoURL
           order
-          Ingredients
+          ingredients
           uploader
         }
       }

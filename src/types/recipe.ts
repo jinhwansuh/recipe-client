@@ -15,6 +15,6 @@ export interface RecipeAttributes {
   title: string;
   videoURL: string;
   order: string;
-  Ingredients: string;
+  ingredients: string;
   uploader: string;
 }

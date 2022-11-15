@@ -8,16 +8,16 @@ const UploadPage = () => {
     title: '',
     videoURL: '',
     order: '',
-    Ingredients: '',
+    ingredients: '',
     uploader: '',
   });
 
   const [createRecipe, { error }] = useMutation(CREATE_RECIPE);
   const handleButtonClick = () => {
     console.log(input);
-    const { title, videoURL, order, Ingredients, uploader } = input;
+    const { title, videoURL, order, ingredients, uploader } = input;
     createRecipe({
-      variables: { title, videoURL, order, Ingredients, uploader },
+      variables: { title, videoURL, order, ingredients, uploader },
     });
   };
 
@@ -44,8 +44,8 @@ const UploadPage = () => {
         <textarea name='order' onChange={handleInputChange}></textarea>
       </div>
       <div>
-        <label>Ingredients</label>
-        <input name='Ingredients' onChange={handleInputChange}></input>
+        <label>ingredients</label>
+        <input name='ingredients' onChange={handleInputChange}></input>
       </div>
       <div>
         <label>uploader</label>
