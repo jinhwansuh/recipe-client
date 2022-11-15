@@ -24,8 +24,8 @@ export const GET_ALL_RECIPES = gql`
 `;
 
 export const GET_SELECT_RECIPE = gql`
-  query getSelectRecipe($id: ID!) {
-    recipes(id: $id) {
+  query getSelectRecipe($id: Int!) {
+    recipe(id: $id) {
       data {
         id
         attributes {
