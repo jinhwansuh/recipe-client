@@ -2,6 +2,10 @@ export interface RecipeAllData {
   recipes: { data: Recipe[] };
 }
 
+export interface RecipeSelectedData {
+  recipe: { data: Recipe };
+}
+
 export interface Recipe {
   id: number;
   attributes: RecipeAttributes;
