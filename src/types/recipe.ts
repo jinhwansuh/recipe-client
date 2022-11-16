@@ -17,4 +17,21 @@ export interface RecipeAttributes {
   order: string;
   ingredients: string;
   uploader: string;
+  measure: JSONkeyType;
+}
+
+export type JSONkeyType = { [key: string]: string };
+
+export type IngredientInput = {
+  name: string;
+  weigh: string;
+  selected: string;
+};
+
+export interface RecipeInput {
+  title: string;
+  uploader: string;
+  videoURL: string;
+  order: string;
+  ingredient: IngredientInput[];
 }

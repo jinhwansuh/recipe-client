@@ -1,10 +1,10 @@
 import { HStack, Input, Select } from '@chakra-ui/react';
-import { Inputs } from 'pages/upload';
 import { UseFormRegister } from 'react-hook-form';
+import { RecipeInput } from '~/types/recipe';
 
 interface Props {
   index: number;
-  register: UseFormRegister<Inputs>;
+  register: UseFormRegister<RecipeInput>;
 }
 
 const IngredientsInput = ({ index, register }: Props) => {
@@ -17,7 +17,7 @@ const IngredientsInput = ({ index, register }: Props) => {
         })}
       />
       <Input
-        placeholder='양'
+        placeholder='양(숫자)'
         {...register(`ingredient.${index}.weigh` as const, {
           required: true,
         })}

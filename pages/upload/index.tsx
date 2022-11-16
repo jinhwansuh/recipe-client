@@ -11,21 +11,7 @@ import styled from '@emotion/styled';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { IngredientsInput } from '~/components';
 import { CREATE_RECIPE } from '~/graphql/Mutations';
-import { RecipeAttributes } from '~/types/recipe';
-
-type Ingredient = {
-  name: string;
-  weigh: string;
-  selected: string;
-};
-
-export interface Inputs {
-  title: string;
-  uploader: string;
-  videoURL: string;
-  order: string;
-  ingredient: Ingredient[];
-}
+import { RecipeAttributes, RecipeInput } from '~/types/recipe';
 
 const UploadPage = () => {
   const {
@@ -33,7 +19,7 @@ const UploadPage = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<Inputs>({
+  } = useForm<RecipeInput>({
     defaultValues: {
       ingredient: [{ name: '', weigh: '', selected: '' }],
     },
@@ -52,7 +38,7 @@ const UploadPage = () => {
   //   });
   // };
 
-  const onSubmit = (data: Inputs) => {
+  const onSubmit = (data: RecipeInput) => {
     console.log(data);
     console.log(123);
   };
