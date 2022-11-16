@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_RECIPES } from '~/graphql/Queries';
 import { RecipeAllData } from '~/types/recipe';
-import styles from '../styles/Home.module.css';
+import styles from '~/styles/Home.module.css';
 
 export default function Home() {
   const { loading, error, data } = useQuery<RecipeAllData>(GET_ALL_RECIPES);
