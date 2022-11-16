@@ -8,7 +8,6 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import { ChangeEvent, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { IngredientsInput } from '~/components';
 import { CREATE_RECIPE } from '~/graphql/Mutations';
