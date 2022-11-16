@@ -10,5 +10,23 @@
   "bracketSpacing": true,
   "arrowParens": "always",
   "proseWrap": "preserve",
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "importOrder": [
+    "^next(.*)$",
+    "^react$",
+    "^@apollo/(.*)$",
+    "^@chakra-ui/(.*)$",
+    "^@emotion/(.*)$",
+    "<THIRD_PARTY_MODULES>",
+    "^~pages/(.*)$",
+    "^~components/(.*)$",
+    "^~hooks/(.*)$",
+    "^~graphql/(.*)$",
+    "^~types/(.*)$",
+    "^~utils/(.*)$",
+    "^~styles/(.*)$",
+    "^~assets/(.*)$",
+    "^~/(.*)$",
+    "^[./]"
+  ]
 }
