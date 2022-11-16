@@ -75,6 +75,10 @@ const UploadPage = () => {
           <FormLabel>순서</FormLabel>
           <Textarea {...register('order', { required: true })} />
         </FormControl>
+        <FormLabel>재료</FormLabel>
+        {fields.map((field, index) => (
+          <IngredientsInput key={field.id} index={index} register={register} />
+        ))}
 
         <Button onClick={handleAddButton}>+</Button>
         <div>
