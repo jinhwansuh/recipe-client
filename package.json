@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier:all": "prettier --write **/*.{tsx,ts,js,json,md,html} --ignore-unknown"
   },
   "dependencies": {
     "@apollo/client": "^3.7.1",
