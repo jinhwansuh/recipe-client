@@ -1,1 +1,1 @@
-export const a = (b: any) => b;
+export { default as IngredientsInput } from './IngredientsInput';
