@@ -19,6 +19,7 @@ const UploadPage = () => {
     handleSubmit,
     control,
     getValues,
+    reset,
     formState: { errors },
   } = useForm<RecipeInput>({
     defaultValues: {
@@ -30,7 +31,11 @@ const UploadPage = () => {
     name: `ingredient`,
   });
 
-  const [createRecipe, { error, loading }] = useMutation(CREATE_RECIPE);
+  const [createRecipe, { error, loading }] = useMutation(CREATE_RECIPE, {
+    onCompleted: () => {
+      reset();
+    },
+  });
 
   const onSubmit = (data: RecipeInput) => {
     const ingredient = getValues('ingredient');
