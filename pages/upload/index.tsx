@@ -1,7 +1,6 @@
 import { useMutation } from '@apollo/client';
 import {
   Button,
-  Flex,
   FormControl,
   FormLabel,
   Input,
@@ -11,13 +10,15 @@ import styled from '@emotion/styled';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { IngredientsInput } from '~/components';
 import { CREATE_RECIPE } from '~/graphql/Mutations';
-import { RecipeAttributes, RecipeInput } from '~/types/recipe';
+import { RecipeInput } from '~/types/recipe';
+import { convertIngredientsToString } from '~/utils/convert';
 
 const UploadPage = () => {
   const {
     register,
     handleSubmit,
     control,
+    getValues,
     formState: { errors },
   } = useForm<RecipeInput>({
     defaultValues: {
@@ -29,18 +30,15 @@ const UploadPage = () => {
     name: `ingredient`,
   });
 
-  const [createRecipe, { error }] = useMutation(CREATE_RECIPE);
-  // const handleButtonClick = () => {
-  //   console.log(input);
-  //   const { title, videoURL, order, ingredients, uploader, measure } = input;
-  //   createRecipe({
-  //     variables: { title, videoURL, order, ingredients, uploader, measure },
-  //   });
-  // };
+  const [createRecipe, { error, loading }] = useMutation(CREATE_RECIPE);
 
   const onSubmit = (data: RecipeInput) => {
-    console.log(data);
-    console.log(123);
+    const ingredient = getValues('ingredient');
+    const { title, videoURL, order, uploader } = data;
+    const ingredients = convertIngredientsToString(ingredient);
+    createRecipe({
+      variables: { title, videoURL, order, ingredients, uploader },
+    });
   };
 
   const handleAddButton = () => {
@@ -65,9 +63,13 @@ const UploadPage = () => {
           <IngredientsInput key={field.id} index={index} register={register} />
         ))}
 
-        <Button onClick={handleAddButton}>+</Button>
+        <Button disabled={loading} onClick={handleAddButton}>
+          +
+        </Button>
         <div>
-          <Button type='submit'>Upload</Button>
+          <Button isLoading={loading} loadingText='Uploading' type='submit'>
+            Upload
+          </Button>
         </div>
       </form>
     </>
