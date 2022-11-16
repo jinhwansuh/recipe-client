@@ -12,6 +12,7 @@ import { IngredientsInput } from '~/components';
 import { CREATE_RECIPE } from '~/graphql/Mutations';
 import { RecipeInput } from '~/types/recipe';
 import { convertIngredientsToString } from '~/utils/convert';
+import { RECIPE_PLACEHOLDER } from '~/constants';
 
 const UploadPage = () => {
   const {
@@ -55,13 +56,25 @@ const UploadPage = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isRequired>
           <FormLabel>제목</FormLabel>
-          <Input {...register('title', { required: true })} />
+          <Input
+            {...register('title', { required: true })}
+            placeholder={RECIPE_PLACEHOLDER.TITLE}
+          />
           <FormLabel>유튜버</FormLabel>
-          <Input {...register('uploader', { required: true })} />
+          <Input
+            {...register('uploader', { required: true })}
+            placeholder={RECIPE_PLACEHOLDER.UPLOADER}
+          />
           <FormLabel>videoURL</FormLabel>
-          <StyledInput {...register('videoURL', { required: true })} />
+          <StyledInput
+            {...register('videoURL', { required: true })}
+            placeholder={RECIPE_PLACEHOLDER.URL}
+          />
           <FormLabel>순서</FormLabel>
-          <Textarea {...register('order', { required: true })} />
+          <Textarea
+            {...register('order', { required: true })}
+            placeholder={RECIPE_PLACEHOLDER.ORDER}
+          />
         </FormControl>
         <FormLabel>재료</FormLabel>
         {fields.map((field, index) => (
