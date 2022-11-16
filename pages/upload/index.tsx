@@ -7,7 +7,7 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { IngredientsInput } from '~/components';
 import { CREATE_RECIPE } from '~/graphql/Mutations';
 import { RecipeInput } from '~/types/recipe';

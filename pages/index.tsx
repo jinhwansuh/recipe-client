@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/client';
 import Head from 'next/head';
 import Image from 'next/image';
+import { useQuery } from '@apollo/client';
 import { GET_ALL_RECIPES } from '~/graphql/Queries';
 import { RecipeAllData } from '~/types/recipe';
 import styles from '../styles/Home.module.css';
