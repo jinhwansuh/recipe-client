@@ -17,6 +17,7 @@ export interface RecipeAttributes {
   order: string;
   ingredients: string;
   uploader: string;
+  tag: string;
   measure: JSONkeyType;
 }
 

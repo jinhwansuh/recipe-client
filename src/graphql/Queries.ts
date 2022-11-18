@@ -17,6 +17,11 @@ export const GET_ALL_RECIPES = gql`
         id
         attributes {
           title
+          order
+          ingredients
+          uploader
+          videoURL
+          tag
         }
       }
     }
@@ -24,7 +29,7 @@ export const GET_ALL_RECIPES = gql`
 `;
 
 export const GET_SELECTED_RECIPE = gql`
-  query getSelectedRecipe($id: Int!) {
+  query getSelectedRecipe($id: ID!) {
     recipe(id: $id) {
       data {
         id
