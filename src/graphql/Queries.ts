@@ -35,7 +35,22 @@ export const GET_SELECTED_RECIPE = gql`
         id
         attributes {
           title
+          order
+          ingredients
+          uploader
+          videoURL
+          tag
         }
+      }
+    }
+  }
+`;
+
+export const GET_ALL_RECIPE_ID = gql`
+  query getAllRecipes {
+    recipes {
+      data {
+        id
       }
     }
   }

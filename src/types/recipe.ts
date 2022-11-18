@@ -36,3 +36,7 @@ export interface RecipeInput {
   order: string;
   ingredient: IngredientInput[];
 }
+
+export interface RecipeAllId {
+  recipes: { data: Pick<Recipe, 'id'>[] };
+}
