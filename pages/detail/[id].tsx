@@ -1,11 +1,12 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import client from 'libs/apollo';
 import { ParsedUrlQuery } from 'querystring';
 import { GET_ALL_RECIPE_ID, GET_SELECTED_RECIPE } from '~/graphql/Queries';
-import { Recipe, RecipeAllId } from '~/types/recipe';
+import { RecipeAllId, RecipeSelectedData } from '~/types/recipe';
 
-const TitlePage = ({
+const DetailPage = ({
   details,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
@@ -13,7 +14,18 @@ const TitlePage = ({
 
   console.log(details);
 
-  return <p>id: {id}</p>;
+  return (
+    <>
+      <Head>
+        <title>{details.recipe.data.attributes.title}</title>
+        <meta
+          name='description'
+          content={details.recipe.data.attributes.title}
+        />
+      </Head>
+      <p>id: {id}</p>
+    </>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -26,11 +38,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps<{ details: Recipe }> = async ({
-  params,
-}) => {
+export const getStaticProps: GetStaticProps<{
+  details: RecipeSelectedData;
+}> = async ({ params }) => {
   const id = (params as ParsedUrlQuery).id;
-  const { data } = await client.query<Recipe>({
+  const { data } = await client.query<RecipeSelectedData>({
     query: GET_SELECTED_RECIPE,
     variables: { id },
   });
@@ -41,4 +53,4 @@ export const getStaticProps: GetStaticProps<{ details: Recipe }> = async ({
   };
 };
 
-export default TitlePage;
+export default DetailPage;
