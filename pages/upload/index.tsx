@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { IngredientsInput } from '~/components';
+import { IngredientsInput } from '~/components/domains';
 import { CREATE_RECIPE } from '~/graphql/Mutations';
 import { RecipeInput } from '~/types/recipe';
 import { convertIngredientsToString } from '~/utils/convert';

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useQuery } from '@apollo/client';
-import { ExploreCard, SearchHeader } from '~/components';
+import { ExploreCard, SearchHeader } from '~/components/domains';
 import { GET_ALL_RECIPES } from '~/graphql/Queries';
 import { RecipeAllData } from '~/types/recipe';
 import styles from '~/styles/Home.module.css';

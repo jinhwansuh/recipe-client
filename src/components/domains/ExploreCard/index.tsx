@@ -14,14 +14,11 @@ import { RecipeAttributes } from '~/types/recipe';
 import { getYoutubeThumbnail } from '~/utils/convert';
 
 interface Props {
-  id: number;
+  id: string;
   data: RecipeAttributes;
 }
 
 const ExploreCard = ({ id, data }: Props) => {
-  const handleCardClick = () => {
-    console.log(123);
-  };
   return (
     <Link href={`/detail/${id}`}>
       <Card
@@ -29,7 +26,6 @@ const ExploreCard = ({ id, data }: Props) => {
         overflow='hidden'
         variant='outline'
         w={800}
-        onClick={handleCardClick}
         _hover={{
           background: 'white',
           color: 'purple',
@@ -62,6 +58,7 @@ const ExploreCard = ({ id, data }: Props) => {
             <Button variant='solid' colorScheme='blue'>
               Buy Latte
             </Button>
+            tag: {data.tag}
           </CardFooter>
         </Stack>
       </Card>
