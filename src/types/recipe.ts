@@ -7,7 +7,7 @@ export interface RecipeSelectedData {
 }
 
 export interface Recipe {
-  id: number;
+  id: string;
   attributes: RecipeAttributes;
 }
 
