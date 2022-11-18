@@ -21,12 +21,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
     query: GET_ALL_RECIPE_ID,
   });
   const paths = data.recipes.data.map((recipe) => ({
-    params: { id: String(recipe.id) },
+    params: { id: recipe.id },
   }));
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<{ details: Recipe }> = async ({
+  params,
+}) => {
   const id = (params as ParsedUrlQuery).id;
   const { data } = await client.query<Recipe>({
     query: GET_SELECTED_RECIPE,
