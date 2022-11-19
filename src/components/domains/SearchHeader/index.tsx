@@ -1,5 +1,4 @@
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { Search2Icon } from '@chakra-ui/icons';
 import {
   Button,
@@ -9,20 +8,19 @@ import {
   InputLeftElement,
   Select,
 } from '@chakra-ui/react';
+import { SearchInput } from '~/types/recipe';
 
-const SearchHeader = () => {
-  const router = useRouter();
-  const [inputState, setInputState] = useState({
-    select: 'tag',
-    search: '',
-  });
+interface Props {
+  inputState: SearchInput;
+  setInputState: Dispatch<SetStateAction<SearchInput>>;
+  handleSearchClick: () => void;
+}
 
-  const handleSearchClick = () => {
-    router.push({
-      pathname: '/search',
-      query: { [inputState.select]: inputState.search },
-    });
-  };
+const SearchHeader = ({
+  inputState,
+  setInputState,
+  handleSearchClick,
+}: Props) => {
   return (
     <header>
       <Flex h='90px' justifyContent={'center'} alignItems={'center'} gap={5}>

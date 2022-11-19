@@ -41,3 +41,8 @@ export interface RecipeInput {
 export interface RecipeAllId {
   recipes: { data: Pick<Recipe, 'id'>[] };
 }
+
+export interface SearchInput {
+  select: string;
+  search: string;
+}
