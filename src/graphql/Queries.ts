@@ -55,3 +55,77 @@ export const GET_ALL_RECIPE_ID = gql`
     }
   }
 `;
+
+export const GET_SEARCH_RECIPEs = gql`
+  query getSearchRecipe($searchInput: String) {
+    recipes(filters: $searchInput) {
+      data {
+        id
+        attributes {
+          title
+          order
+          ingredients
+          uploader
+          videoURL
+          tag
+        }
+      }
+    }
+  }
+`;
+
+// export const GET_SEARCH_RECIPEs = gql`
+//   query searchTitleRecipe($select: String, $search: String) {
+//     recipes(filters: { $select: { contains: $search } }) {
+//       data {
+//         id
+//         attributes {
+//           title
+//           order
+//           ingredients
+//           uploader
+//           videoURL
+//           tag
+//         }
+//       }
+//     }
+//   }
+// `;
+
+export const GET_SEARCH_RECIPE = (select: string, search: string) => {
+  return gql`
+    query getSearchRecipe {
+      recipes(filters: { ${select}: { contains: "${search}" } }) {
+        data {
+          id
+          attributes {
+            title
+            order
+            ingredients
+            uploader
+            videoURL
+            tag
+          }
+        }
+      }
+    }
+  `;
+};
+
+// export const GET_SEARCH_RECIPE = (a) => gql`
+//   query getSearchRecipe($searchInput: SearchInput) {
+//     recipes(filters: ${a}) {
+//       data {
+//         id
+//         attributes {
+//           title
+//           order
+//           ingredients
+//           uploader
+//           videoURL
+//           tag
+//         }
+//       }
+//     }
+//   }
+// `;
