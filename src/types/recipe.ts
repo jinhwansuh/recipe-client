@@ -35,6 +35,7 @@ export interface RecipeInput {
   videoURL: string;
   order: string;
   ingredient: IngredientInput[];
+  tag: string;
 }
 
 export interface RecipeAllId {

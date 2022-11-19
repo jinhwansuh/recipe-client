@@ -35,15 +35,16 @@ const UploadPage = () => {
   const [createRecipe, { error, loading }] = useMutation(CREATE_RECIPE, {
     onCompleted: () => {
       reset();
+      alert('success');
     },
   });
 
   const onSubmit = (data: RecipeInput) => {
     const ingredient = getValues('ingredient');
-    const { title, videoURL, order, uploader } = data;
+    const { title, videoURL, order, uploader, tag } = data;
     const ingredients = convertIngredientsToString(ingredient);
     createRecipe({
-      variables: { title, videoURL, order, ingredients, uploader },
+      variables: { title, videoURL, order, ingredients, uploader, tag },
     });
   };
 
@@ -59,6 +60,11 @@ const UploadPage = () => {
           <Input
             {...register('title', { required: true })}
             placeholder={RECIPE_PLACEHOLDER.TITLE}
+          />
+          <FormLabel>요리 이름</FormLabel>
+          <Input
+            {...register('tag', { required: true })}
+            placeholder={RECIPE_PLACEHOLDER.TAG}
           />
           <FormLabel>유튜버</FormLabel>
           <Input
