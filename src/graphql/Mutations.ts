@@ -7,6 +7,7 @@ export const CREATE_RECIPE = gql`
     $order: String!
     $ingredients: String!
     $uploader: String!
+    $tag: String!
   ) {
     createRecipe(
       data: {
@@ -15,6 +16,7 @@ export const CREATE_RECIPE = gql`
         order: $order
         ingredients: $ingredients
         uploader: $uploader
+        tag: $tag
       }
     ) {
       data {
@@ -25,6 +27,7 @@ export const CREATE_RECIPE = gql`
           order
           ingredients
           uploader
+          tag
         }
       }
     }
