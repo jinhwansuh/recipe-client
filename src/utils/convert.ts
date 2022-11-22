@@ -1,4 +1,4 @@
-import { IngredientInput } from '~/types/recipe';
+import { IngredientInput, SplitIngredient } from '~/types/recipe';
 
 const DEFAULT_YOUTUBE_URL_Id = '5FpmyEp7QFk';
 
@@ -29,13 +29,19 @@ export const getYoutubeEmbedURL = (videoURL: string): string => {
   return `https://www.youtube.com/embed/${id}`;
 };
 
-export const getIngredientArray = (ingredientArray: string): string[][] => {
+/**
+ * @param ingredientArray ex) 소면:2인분,고추장:1T
+ * @returns [[소면, 2, 인분], [고추장, 1, T]]
+ */
+export const getIngredientArray = (
+  ingredientArray: string,
+): SplitIngredient[] => {
   return ingredientArray
     .split(',')
     .map((el) => el.split(':'))
     .map((el) => [
       el[0],
-      el[1].replace(/[^0-9]/g, ''),
+      +el[1].replace(/[^0-9]/g, ''),
       el[1].replace(/[0-9]/gi, ''),
     ]);
 };

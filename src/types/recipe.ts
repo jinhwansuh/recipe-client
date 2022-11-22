@@ -46,3 +46,5 @@ export interface SearchInput {
   select: string;
   search: string;
 }
+
+export type SplitIngredient = [string, number, string];
