@@ -30,5 +30,12 @@ export const getYoutubeEmbedURL = (videoURL: string): string => {
 };
 
 export const getIngredientArray = (ingredientArray: string): string[][] => {
-  return ingredientArray.split(',').map((el) => el.split(':'));
+  return ingredientArray
+    .split(',')
+    .map((el) => el.split(':'))
+    .map((el) => [
+      el[0],
+      el[1].replace(/[^0-9]/g, ''),
+      el[1].replace(/[0-9]/gi, ''),
+    ]);
 };
