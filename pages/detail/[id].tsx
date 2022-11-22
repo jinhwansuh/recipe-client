@@ -7,7 +7,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { IngredientModal } from '~/components/domains';
 import { GET_ALL_RECIPE_ID, GET_SELECTED_RECIPE } from '~/graphql/Queries';
 import { RecipeAllId, RecipeSelectedData } from '~/types/recipe';
-import { getYoutubeEmbedURL } from '~/utils/convert';
+import { getIngredientArray, getYoutubeEmbedURL } from '~/utils/convert';
 
 const DetailPage = ({
   details,
@@ -21,20 +21,22 @@ const DetailPage = ({
     });
   };
 
+  const { title, videoURL, tag, uploader, order, ingredients } =
+    details.recipe.data.attributes;
+
+  const ingredientArray = getIngredientArray(ingredients);
+
   return (
     <>
       <Head>
-        <title>{details.recipe.data.attributes.title}</title>
-        <meta
-          name='description'
-          content={details.recipe.data.attributes.title}
-        />
+        <title>{title}</title>
+        <meta name='description' content={title} />
       </Head>
       <Flex as={'main'} direction='column' alignItems={'center'} minH={'100vh'}>
         <Flex direction='column' w={600}>
           <Center>
             <iframe
-              src={getYoutubeEmbedURL(details.recipe.data.attributes.videoURL)}
+              src={getYoutubeEmbedURL(videoURL)}
               frameBorder='0'
               allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
               allowFullScreen
@@ -43,26 +45,22 @@ const DetailPage = ({
             />
           </Center>
 
-          <Heading size={'xl'}>{details.recipe.data.attributes.title}</Heading>
+          <Heading size={'xl'}>{title}</Heading>
           <Flex>
-            <Box onClick={handleTagClick}>
-              {details.recipe.data.attributes.tag}
-            </Box>
+            <Box onClick={handleTagClick}>{tag}</Box>
             <Spacer />
-            <Box>{details.recipe.data.attributes.uploader}</Box>
+            <Box>{uploader}</Box>
           </Flex>
           <Box>
-            {details.recipe.data.attributes.order
-              .split('\n')
-              .map((line, index) => (
-                <Box key={index}>{line}</Box>
-              ))}
+            {order.split('\n').map((line, index) => (
+              <Box key={index}>{line}</Box>
+            ))}
           </Box>
           <Flex>
             <Box w={'70px'}>재료 : </Box>
-            <Box>{details.recipe.data.attributes.ingredients}</Box>
+            <Box>{ingredients}</Box>
             <Box>
-              <IngredientModal />
+              <IngredientModal data={ingredientArray} />
             </Box>
           </Flex>
         </Flex>
