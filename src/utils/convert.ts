@@ -28,3 +28,7 @@ export const getYoutubeEmbedURL = (videoURL: string): string => {
   const id = getYoutubeVideoId(videoURL);
   return `https://www.youtube.com/embed/${id}`;
 };
+
+export const getIngredientArray = (ingredientArray: string): string[][] => {
+  return ingredientArray.split(',').map((el) => el.split(':'));
+};
