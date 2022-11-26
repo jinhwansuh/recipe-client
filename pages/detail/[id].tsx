@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Box, Center, Flex, Heading, Spacer } from '@chakra-ui/react';
+import { Box, Center, Flex, Heading, Spacer, Text } from '@chakra-ui/react';
 import client from 'libs/apollo';
 import { ParsedUrlQuery } from 'querystring';
 import { IngredientModal } from '~/components/domains';
@@ -58,7 +58,13 @@ const DetailPage = ({
           </Box>
           <Flex>
             <Box w={'70px'}>재료 : </Box>
-            <Box>{ingredients}</Box>
+            <Box>
+              <Flex>
+                {ingredientArray.map((ingredient, index) => (
+                  <Text key={index}>{ingredient[0]}</Text>
+                ))}
+              </Flex>
+            </Box>
             <Box>
               <IngredientModal data={ingredientArray} />
             </Box>
