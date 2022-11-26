@@ -9,8 +9,14 @@ import {
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
+import { SplitIngredient } from '~/types/recipe';
+import IngredientTable from '../IngredientTable';
 
-const IngredientModal = () => {
+interface Props {
+  data: SplitIngredient[];
+}
+
+const IngredientModal = ({ data }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -22,26 +28,10 @@ const IngredientModal = () => {
       <Modal onClose={onClose} size={'xl'} isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader textAlign={'center'}>재료 계량</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est, animi
-            id aliquam mollitia error, rerum voluptatum corrupti consequuntur
-            dolorum vel nam ad culpa, beatae fuga! Quisquam corporis est
-            molestias doloremque.Lorem ipsum dolor, sit amet consectetur
-            adipisicing elit. Est, animi id aliquam mollitia error, rerum
-            voluptatum corrupti consequuntur dolorum vel nam ad culpa, beatae
-            fuga! Quisquam corporis est molestias doloremque.Lorem ipsum dolor,
-            sit amet consectetur adipisicing elit. Est, animi id aliquam
-            mollitia error, rerum voluptatum corrupti consequuntur dolorum vel
-            nam ad culpa, beatae fuga! Quisquam corporis est molestias
-            doloremque.Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            Est, animi id aliquam mollitia error, rerum voluptatum corrupti
-            consequuntur dolorum vel nam ad culpa, beatae fuga! Quisquam
-            corporis est molestias doloremque.Lorem ipsum dolor, sit amet
-            consectetur adipisicing elit. Est, animi id aliquam mollitia error,
-            rerum voluptatum corrupti consequuntur dolorum vel nam ad culpa,
-            beatae fuga! Quisquam corporis est molestias doloremque.
+            <IngredientTable data={data} />
           </ModalBody>
           <ModalFooter>
             <Button onClick={onClose}>Close</Button>
