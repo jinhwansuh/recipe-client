@@ -47,4 +47,4 @@ export interface SearchInput {
   search: string;
 }
 
-export type SplitIngredient = [string, number, string];
+export type SplitIngredient = [string, string, string];

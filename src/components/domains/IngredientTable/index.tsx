@@ -1,6 +1,8 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import {
+  Flex,
   Input,
+  Spacer,
   Table,
   TableCaption,
   TableContainer,
@@ -18,8 +20,12 @@ interface Props {
 }
 
 const IngredientTable = ({ data }: Props) => {
-  const [baseState, setBaseState] = useState<{ [key: string]: number }>({});
-  const [inputState, setInputState] = useState<{ [key: string]: number }>({});
+  const [baseState, setBaseState] = useState<{
+    [key: SplitIngredient[0]]: SplitIngredient[1];
+  }>({});
+  const [inputState, setInputState] = useState<{
+    [key: SplitIngredient[0]]: SplitIngredient[1];
+  }>({});
 
   useEffect(() => {
     data.forEach((el) => {
@@ -38,14 +44,15 @@ const IngredientTable = ({ data }: Props) => {
     const { value, name } = e.target;
     const prevValue = baseState[name];
     const rate = (+value || 0) / +prevValue;
+    setInputState((prev) => ({ ...prev, [name]: value }));
     data.forEach((el) =>
       setInputState((prev) => ({
         ...prev,
-        [el[0]]: +String(el[1] * rate).replace(/^0+/, ''),
+        [el[0]]: String(+el[1] * rate),
       })),
     );
   };
-  // https://m.blog.naver.com/pjt3591oo/222042233171
+
   return (
     <TableContainer>
       <Table variant='simple' size={'sm'}>
@@ -64,8 +71,10 @@ const IngredientTable = ({ data }: Props) => {
                 {el[0]}
               </Td>
               <Td fontSize={'xl'} w={'30%'}>
-                <Text as={'span'}>{el[1]}</Text>
-                <Text as={'span'}>{el[2]}</Text>
+                <Flex>
+                  <Text>{el[1]}</Text>
+                  <Text>{el[2]}</Text>
+                </Flex>
               </Td>
               <Td>
                 <Input
