@@ -25,6 +25,7 @@ const IngredientTable = ({ data }: Props) => {
   const [inputState, setInputState] = useState<{
     [key: SplitIngredient[0]]: SplitIngredient[1];
   }>({});
+  const [indexState, setIndexState] = useState<number | null>(null);
 
   useEffect(() => {
     data.forEach((el) => {
@@ -54,7 +55,9 @@ const IngredientTable = ({ data }: Props) => {
   return (
     <TableContainer>
       <Table variant='simple' size={'sm'}>
-        <TableCaption>숫자를 입력하면 자동 계량이 됩니다.</TableCaption>
+        <TableCaption placement='top' marginTop={0}>
+          숫자를 입력하면 자동 계량이 됩니다.
+        </TableCaption>
         <Thead>
           <Tr>
             <Th>Ingredient</Th>
@@ -64,7 +67,10 @@ const IngredientTable = ({ data }: Props) => {
         </Thead>
         <Tbody>
           {data.map((el, index) => (
-            <Tr key={index}>
+            <Tr
+              key={index}
+              backgroundColor={index === indexState ? '#FFDAB9' : 'none'}
+            >
               <Td fontSize={'xl'} w={'40%'}>
                 {el[0]}
               </Td>
@@ -79,7 +85,10 @@ const IngredientTable = ({ data }: Props) => {
                   name={el[0]}
                   type='number'
                   value={inputState[el[0]] || 0}
-                  onChange={handleValueChange}
+                  onChange={(e) => {
+                    handleValueChange(e);
+                    setIndexState(index);
+                  }}
                   min={0}
                   w={'80%'}
                   step={'0.1'}
