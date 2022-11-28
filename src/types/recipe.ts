@@ -43,7 +43,7 @@ export interface RecipeAllId {
 }
 
 export interface SearchInput {
-  select: string;
+  select: 'title' | 'tag' | 'ingredients' | 'uploader';
   search: string;
 }
 
