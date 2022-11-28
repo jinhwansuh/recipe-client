@@ -74,24 +74,6 @@ export const GET_SEARCH_RECIPEs = gql`
   }
 `;
 
-// export const GET_SEARCH_RECIPEs = gql`
-//   query searchTitleRecipe($select: String, $search: String) {
-//     recipes(filters: { $select: { contains: $search } }) {
-//       data {
-//         id
-//         attributes {
-//           title
-//           order
-//           ingredients
-//           uploader
-//           videoURL
-//           tag
-//         }
-//       }
-//     }
-//   }
-// `;
-
 export const GET_SEARCH_RECIPE = (select: string, search: string) => {
   return gql`
     query getSearchRecipe {
@@ -111,21 +93,3 @@ export const GET_SEARCH_RECIPE = (select: string, search: string) => {
     }
   `;
 };
-
-// export const GET_SEARCH_RECIPE = (a) => gql`
-//   query getSearchRecipe($searchInput: SearchInput) {
-//     recipes(filters: ${a}) {
-//       data {
-//         id
-//         attributes {
-//           title
-//           order
-//           ingredients
-//           uploader
-//           videoURL
-//           tag
-//         }
-//       }
-//     }
-//   }
-// `;
