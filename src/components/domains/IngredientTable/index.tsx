@@ -2,7 +2,6 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import {
   Flex,
   Input,
-  Spacer,
   Table,
   TableCaption,
   TableContainer,
@@ -42,13 +41,12 @@ const IngredientTable = ({ data }: Props) => {
 
   const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    const prevValue = baseState[name];
-    const rate = (+value || 0) / +prevValue;
-    setInputState((prev) => ({ ...prev, [name]: value }));
+    const baseValue = baseState[name];
+    const rate = (+value || 0) / +baseValue;
     data.forEach((el) =>
       setInputState((prev) => ({
         ...prev,
-        [el[0]]: String(+el[1] * rate),
+        [el[0]]: String(Math.round(+baseState[el[0]] * +rate * 10) / 10),
       })),
     );
   };
@@ -84,6 +82,7 @@ const IngredientTable = ({ data }: Props) => {
                   onChange={handleValueChange}
                   min={0}
                   w={'80%'}
+                  step={'0.1'}
                 />
                 <Text as={'span'} paddingLeft={'3px'}>
                   {el[2]}
