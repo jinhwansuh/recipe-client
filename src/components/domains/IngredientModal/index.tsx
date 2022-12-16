@@ -28,7 +28,9 @@ const IngredientModal = ({ data }: Props) => {
       <Modal onClose={onClose} size={'xl'} isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader textAlign={'center'}>재료 계량</ModalHeader>
+          <ModalHeader textAlign={'center'} paddingBottom={'5px'}>
+            재료 계량
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <IngredientTable data={data} />

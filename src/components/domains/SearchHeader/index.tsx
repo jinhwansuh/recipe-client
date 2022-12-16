@@ -35,17 +35,17 @@ const SearchHeader = () => {
             h='90px'
             justifyContent={'center'}
             alignItems={'center'}
-            gap={5}
+            gap={4}
           >
             <Flex>
-              <Select w={20} defaultValue={'tag'} {...register('select')}>
+              <Select w={'100px'} defaultValue={'tag'} {...register('select')}>
                 <option value={'title'}>제목</option>
                 <option value={'tag'}>요리</option>
                 <option value={'ingredients'}>재료</option>
                 <option value={'uploader'}>유튜버</option>
               </Select>
 
-              <InputGroup w={40}>
+              <InputGroup w={'80%'}>
                 <InputLeftElement pointerEvents='none'>
                   <Search2Icon color='gray.300' />
                 </InputLeftElement>

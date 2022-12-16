@@ -20,6 +20,7 @@ const IngredientsInput = ({ index, register }: Props) => {
         })}
       />
       <Input
+        type={'number'}
         placeholder={RECIPE_PLACEHOLDER.INGREDIENT_WEIGH}
         {...register(`ingredient.${index}.weigh` as const, {
           required: true,

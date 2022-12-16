@@ -10,7 +10,7 @@ interface Props {
 }
 
 const ExploreCard = ({ id, data }: Props) => {
-  const { videoURL, title, ingredients, tag } = data;
+  const { videoURL, title, ingredients, uploader, tag } = data;
   const ingredientArray = getIngredientArray(ingredients);
 
   return (
@@ -25,12 +25,17 @@ const ExploreCard = ({ id, data }: Props) => {
             alt='thumbnail'
           />
         </StyledImageWrapper>
+
         <StyledDetailWrapper>
           <Heading size={'md'} wordBreak={'keep-all'}>
             {title}
           </Heading>
+          <div>
+            <Text>{uploader}</Text>
+          </div>
+
           <StyledIngredientWrapper>
-            <Text w={'40px'}>재료 :</Text>
+            <Text w={'40px'}>재료 : </Text>
             <StyledIngredientDetails>
               {ingredientArray.map((ingredient, index) => (
                 <Text as={'span'} key={index} px='1'>
@@ -39,6 +44,7 @@ const ExploreCard = ({ id, data }: Props) => {
               ))}
             </StyledIngredientDetails>
           </StyledIngredientWrapper>
+
           <StyledFoodWrapper>
             <Text>요리 : {tag}</Text>
             <Button variant='solid' colorScheme='blue'>
