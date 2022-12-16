@@ -9,6 +9,13 @@ import styles from '~/styles/Home.module.css';
 export default function Home({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  client.writeQuery({
+    query: GET_ALL_RECIPES,
+    data: {
+      recipes: data.recipes,
+    },
+  });
+
   return (
     <>
       <Head>
