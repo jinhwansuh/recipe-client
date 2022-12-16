@@ -41,7 +41,7 @@ export const getIngredientArray = (
     .map((el) => el.split(':'))
     .map((el) => [
       el[0],
-      +el[1].replace(/[^0-9]/g, ''),
+      el[1].replace(/[^0-9]/g, ''),
       el[1].replace(/[0-9]/gi, ''),
     ]);
 };
