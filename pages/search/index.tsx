@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import _ from 'lodash';
+import { SearchHeader } from '~/components/domains';
 import { GET_SEARCH_RECIPE } from '~/graphql/Queries';
 import { RecipeAllData } from '~/types/recipe';
 
@@ -35,9 +36,16 @@ const SearchPage = () => {
   }, [queryState]);
 
   if (loading) return <div>loading...</div>;
-  if (error) return <div>no server connection.</div>;
+  if (error)
+    return (
+      <>
+        <SearchHeader />
+        <div>no server connection.</div>
+      </>
+    );
   return (
     <>
+      <SearchHeader />
       <div>{queryState.search}의 결과값들</div>
       {data?.recipes.data.map((recipe) => (
         <div key={recipe.id}>{recipe.attributes.title}</div>
