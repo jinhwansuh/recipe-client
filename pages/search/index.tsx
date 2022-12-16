@@ -34,11 +34,11 @@ const SearchPage = () => {
     }
   }, [queryState]);
 
-  if (error) return <div>잘못된 접근입니다.</div>;
+  if (loading) return <div>loading...</div>;
+  if (error) return <div>no server connection.</div>;
   return (
     <>
       <div>{queryState.search}의 결과값들</div>
-      {loading && <div>로딩중</div>}
       {data?.recipes.data.map((recipe) => (
         <div key={recipe.id}>{recipe.attributes.title}</div>
       ))}
