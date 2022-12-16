@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Box, Center, Flex, Heading, Spacer, Text } from '@chakra-ui/react';
-import client from 'libs/apollo';
+import client, { serverClient } from 'libs/apollo';
 import { ParsedUrlQuery } from 'querystring';
 import { IngredientModal } from '~/components/domains';
 import { GET_ALL_RECIPE_ID, GET_SELECTED_RECIPE } from '~/graphql/Queries';
@@ -89,7 +89,7 @@ export const getStaticProps: GetStaticProps<{
   details: RecipeSelectedData;
 }> = async ({ params }) => {
   const id = (params as ParsedUrlQuery).id;
-  const { data } = await client.query<RecipeSelectedData>({
+  const { data } = await serverClient.query<RecipeSelectedData>({
     query: GET_SELECTED_RECIPE,
     variables: { id },
   });

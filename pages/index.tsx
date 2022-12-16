@@ -1,6 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
-import client from 'libs/apollo';
+import client, { serverClient } from 'libs/apollo';
 import { ExploreCard, SearchHeader } from '~/components/domains';
 import { GET_ALL_RECIPES } from '~/graphql/Queries';
 import { RecipeAllData } from '~/types/recipe';
@@ -42,7 +42,7 @@ export default function Home({
 export const getStaticProps: GetStaticProps<{
   data: RecipeAllData;
 }> = async () => {
-  const { data } = await client.query<RecipeAllData>({
+  const { data } = await serverClient.query<RecipeAllData>({
     query: GET_ALL_RECIPES,
   });
   return {
