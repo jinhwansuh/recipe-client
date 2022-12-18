@@ -1,20 +1,12 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
-import client, { serverClient } from 'libs/apollo';
+import { useQuery } from '@apollo/client';
 import { ExploreCard, SearchHeader } from '~/components/domains';
 import { GET_ALL_RECIPES } from '~/graphql/Queries';
 import { RecipeAllData } from '~/types/recipe';
 import styles from '~/styles/Home.module.css';
 
-export default function Home({
-  data,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  client.writeQuery({
-    query: GET_ALL_RECIPES,
-    data: {
-      recipes: data.recipes,
-    },
-  });
+export default function Home() {
+  const { data, loading, error } = useQuery<RecipeAllData>(GET_ALL_RECIPES);
 
   return (
     <>
@@ -24,6 +16,9 @@ export default function Home({
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <SearchHeader />
+
+      {loading && <div>loading...</div>}
+
       <main className={styles.main}>
         {data?.recipes.data.map((recipe) => (
           <ExploreCard
@@ -38,16 +33,3 @@ export default function Home({
     </>
   );
 }
-
-export const getStaticProps: GetStaticProps<{
-  data: RecipeAllData;
-}> = async () => {
-  const { data } = await serverClient.query<RecipeAllData>({
-    query: GET_ALL_RECIPES,
-  });
-  return {
-    props: {
-      data,
-    },
-  };
-};
