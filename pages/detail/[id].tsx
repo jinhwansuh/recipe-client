@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Box, Center, Flex, Heading, Spacer, Text } from '@chakra-ui/react';
+import styled from '@emotion/styled';
 import client from 'libs/apollo';
 import { ParsedUrlQuery } from 'querystring';
 import { IngredientModal } from '~/components/domains';
@@ -18,6 +19,13 @@ const DetailPage = ({
     router.push({
       pathname: '/search',
       query: { tag: details.recipe.data.attributes.tag },
+    });
+  };
+
+  const handleUploaderClick = () => {
+    router.push({
+      pathname: '/search',
+      query: { uploader: details.recipe.data.attributes.uploader },
     });
   };
 
@@ -46,25 +54,26 @@ const DetailPage = ({
           </Center>
 
           <Heading size={'xl'}>{title}</Heading>
-          <Flex>
-            <Box onClick={handleTagClick}>{tag}</Box>
-            <Spacer />
-            <Box>{uploader}</Box>
-          </Flex>
-          <Box>
+          <StyledSubWrapper>
+            <StyledTag onClick={handleTagClick}>{tag}</StyledTag>
+            <StyledTag onClick={handleUploaderClick}>{uploader}</StyledTag>
+          </StyledSubWrapper>
+          <StyledOrderWrapper>
             {order.split('\n').map((line, index) => (
               <Box key={index}>{line}</Box>
             ))}
-          </Box>
+          </StyledOrderWrapper>
           <Flex>
-            <Box w={'70px'}>재료 : </Box>
-            <Box>
-              <Flex>
+            <StyledIngredientWrapper>
+              <Text w={'40px'}>재료 : </Text>
+              <StyledIngredientDetails>
                 {ingredientArray.map((ingredient, index) => (
-                  <Text key={index}>{ingredient[0]}</Text>
+                  <Text as={'span'} key={index} px='1'>
+                    {ingredient[0]}
+                  </Text>
                 ))}
-              </Flex>
-            </Box>
+              </StyledIngredientDetails>
+            </StyledIngredientWrapper>
             <Box>
               <IngredientModal data={ingredientArray} />
             </Box>
@@ -82,6 +91,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = data.recipes.data.map((recipe) => ({
     params: { id: recipe.id },
   }));
+
+  // true, false, 'blocking'
   return { paths, fallback: false };
 };
 
@@ -89,15 +100,45 @@ export const getStaticProps: GetStaticProps<{
   details: RecipeSelectedData;
 }> = async ({ params }) => {
   const id = (params as ParsedUrlQuery).id;
-  const { data } = await client.query<RecipeSelectedData>({
+  const { data: details } = await client.query<RecipeSelectedData>({
     query: GET_SELECTED_RECIPE,
     variables: { id },
   });
+
   return {
     props: {
-      details: data,
+      details,
     },
   };
 };
+const StyledSubWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+`;
+
+const StyledTag = styled.div`
+  border: 0.5px solid #eee;
+  border-radius: 10%;
+
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  &:hover {
+    background-color: #ccc;
+  }
+`;
+
+const StyledOrderWrapper = styled.div`
+  margin: 23px 0;
+`;
+
+const StyledIngredientWrapper = styled.div`
+  display: flex;
+`;
+
+const StyledIngredientDetails = styled.div`
+  flex: 1;
+`;
 
 export default DetailPage;
