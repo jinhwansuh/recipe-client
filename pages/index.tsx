@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useQuery } from '@apollo/client';
-import { ExploreCard, SearchHeader } from '~/components/domains';
+import { ExploreCard, SearchHeader, ServerLoading } from '~/components/domains';
 import { GET_ALL_RECIPES } from '~/graphql/Queries';
 import { RecipeAllData } from '~/types/recipe';
 import styles from '~/styles/Home.module.css';
@@ -17,7 +17,8 @@ export default function Home() {
       </Head>
       <SearchHeader />
 
-      {loading && <div>loading...</div>}
+      {loading && <ServerLoading />}
+      {error && <div>서버와의 통신 에러입니다.</div>}
 
       <main className={styles.main}>
         {data?.recipes.data.map((recipe) => (
@@ -28,8 +29,6 @@ export default function Home() {
           />
         ))}
       </main>
-
-      <footer className={styles.footer}>footer</footer>
     </>
   );
 }

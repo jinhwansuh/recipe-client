@@ -3,3 +3,4 @@ export { default as SearchHeader } from './SearchHeader';
 export { default as ExploreCard } from './ExploreCard';
 export { default as IngredientModal } from './IngredientModal';
 export { default as IngredientTable } from './IngredientTable';
+export { default as ServerLoading } from './ServerLoading';
