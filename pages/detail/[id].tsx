@@ -15,6 +15,15 @@ const DetailPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
 
+  if (router.isFallback) {
+    return (
+      <div>
+        <div>정적페이지가 없는 새로운 데이터를 불러오는 중입니다.</div>
+        <div>데이터가 없다면 404페이지가 보여지게 됩니다.</div>
+      </div>
+    );
+  }
+
   const handleTagClick = () => {
     router.push({
       pathname: '/search',
@@ -93,7 +102,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
 
   // true, false, 'blocking'
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 };
 
 export const getStaticProps: GetStaticProps<{
@@ -104,6 +113,8 @@ export const getStaticProps: GetStaticProps<{
     query: GET_SELECTED_RECIPE,
     variables: { id },
   });
+
+  if (!details.recipe.data) return { notFound: true };
 
   return {
     props: {

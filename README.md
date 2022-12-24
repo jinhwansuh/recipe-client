@@ -8,6 +8,8 @@
 
 **프로젝트 목표**
 
+Apollo-client를 이용하여 graphql 통신을 구현해보고,
+
 Next.js의 getStaticPaths와 getStaticProps를 이용하여 정적 페이지 [(detail 페이지)](https://github.com/jinhwansuh/recipe-client/blob/main/pages/detail/%5Bid%5D.tsx)를 만들어보기
 
 --- 
